@@ -1,7 +1,6 @@
 using Microservice.RabbitMQMessageBrokerExtension.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -22,10 +21,11 @@ namespace Microservice.RabbitMqMessageBrokerApi.Test
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddRabbitMqMessageBroker(o =>
-                {
-                    _configuration.GetSection("MessageBrokerSettings").Get<MessageBrokerSettings>();
-                })
+                .AddControllers();
+            services
+                .AddMvc();
+            services
+                .AddRabbitMqMessageBroker(_configuration.GetSection("MessageBrokerSettings"))
                 ;
 
         }
@@ -38,15 +38,13 @@ namespace Microservice.RabbitMqMessageBrokerApi.Test
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseRouting();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapGet("/", async context =>
+            app
+                .UseRouting()
+                .UseEndpoints(endpoints =>
                 {
-                    await context.Response.WriteAsync("Hello World!");
-                });
-            });
+                    endpoints.MapControllers();
+                })
+                ;
         }
     }
 }

@@ -17,14 +17,14 @@ using Formatting = System.Xml.Formatting;
 
 namespace Microservice.RabbitMQMessageBrokerExtension
 {
-    public class RabbitMessageBrokerClient: IRabbitMessageBrokerClient
+    public class RabbitMessageBrokerClient : IRabbitMessageBrokerClient
     {
         private IModel Channel { get; set; }
 
         private readonly ILogger<RabbitMessageBrokerClient> _logger;
-        private readonly IOptionsSnapshot<MessageBrokerSettings> _options;
+        private readonly IOptions<MessageBrokerSettings> _options;
         private readonly IMessageBrokerDefaultLogger _defaultLogger;
-        public RabbitMessageBrokerClient(ILogger<RabbitMessageBrokerClient> logger, IOptionsSnapshot<MessageBrokerSettings> options)
+        public RabbitMessageBrokerClient(ILogger<RabbitMessageBrokerClient> logger, IOptions<MessageBrokerSettings> options)
         {
             _logger = logger;
             _options = options;
@@ -36,6 +36,11 @@ namespace Microservice.RabbitMQMessageBrokerExtension
             int attempt = 1,
             int previousRetryDelay = 1000)
         {
+
+            if (_options.Value.Host == null || _options.Value.Port == 0 || _options.Value.UserName == null ||
+                _options.Value.Password == null)
+                throw new Exception("RabbitMQ: Please check RabbitMq json settings as there is null values in the MessageBrokerSettings object  {@details}");
+
             var factory = new ConnectionFactory
             {
                 HostName = _options.Value.Host,
@@ -218,7 +223,7 @@ namespace Microservice.RabbitMQMessageBrokerExtension
                 durable: true
             );
 
-            var bodyAsString = JsonConvert.SerializeObject(message, (Newtonsoft.Json.Formatting) Formatting.Indented);
+            var bodyAsString = JsonConvert.SerializeObject(message, (Newtonsoft.Json.Formatting)Formatting.Indented);
             var body = Encoding.UTF8.GetBytes(bodyAsString);
 
             channel.BasicPublish(topic,

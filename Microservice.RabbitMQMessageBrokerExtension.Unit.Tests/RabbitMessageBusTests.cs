@@ -23,12 +23,10 @@ namespace Microservice.RabbitMQMessageBrokerExtension.Unit.Tests
             var services = new ServiceCollection();
 
             var host = config.GetSection("MessageBrokerSettings").Get<MessageBrokerSettings>().Host;
-
+            
+            
             services
-                .AddRabbitMqMessageBroker(o =>
-                {
-                    o = config.GetSection("MessageBrokerSettings").Get<MessageBrokerSettings>();
-                })
+                .AddRabbitMqMessageBroker(config.GetSection("MessageBrokerSettings"))
                 .AddLogging()
                 ;
 
