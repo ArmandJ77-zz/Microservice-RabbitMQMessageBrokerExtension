@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservice.RabbitMQMessag
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservice.RabbitMQMessageBrokerExtension.Unit.Tests", "Microservice.RabbitMQMessageBrokerExtension.Unit.Tests\Microservice.RabbitMQMessageBrokerExtension.Unit.Tests.csproj", "{BAA51D86-FC0A-4F80-8DE4-12564F68740F}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microservice.RabbitMqMessageBrokerApi.Test", "Microservice.RabbitMqMessageBrokerApi.Test\Microservice.RabbitMqMessageBrokerApi.Test.csproj", "{B67DE420-5CF4-4349-A2BB-DEBDA288DE01}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{BAA51D86-FC0A-4F80-8DE4-12564F68740F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BAA51D86-FC0A-4F80-8DE4-12564F68740F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BAA51D86-FC0A-4F80-8DE4-12564F68740F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B67DE420-5CF4-4349-A2BB-DEBDA288DE01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B67DE420-5CF4-4349-A2BB-DEBDA288DE01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B67DE420-5CF4-4349-A2BB-DEBDA288DE01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B67DE420-5CF4-4349-A2BB-DEBDA288DE01}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
