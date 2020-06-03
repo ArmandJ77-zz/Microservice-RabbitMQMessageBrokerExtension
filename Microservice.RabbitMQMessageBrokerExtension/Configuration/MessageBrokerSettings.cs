@@ -1,6 +1,4 @@
-﻿using Microservice.RabbitMQMessageBrokerExtension.Models;
-
-namespace Microservice.RabbitMQMessageBrokerExtension.Configuration
+﻿namespace Microservice.RabbitMQMessageBrokerExtension.Configuration
 {
     public  class MessageBrokerSettings
     {
