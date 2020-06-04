@@ -23,7 +23,6 @@ jobs:
         echo "NuGetVersionV2: ${{ steps.gitversion.outputs.nuGetVersionV2 }}"
         echo "NuGetPreReleaseTagV2: ${{ steps.gitversion.outputs.CommitsSinceVersionSourcePadded }}"
         echo "Gitversion outputs: ${{steps.gitversion.outputs}}"
-        echo "GitVersion_FullSemVer: ${{$GitVersion_FullSemVer}}"
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
