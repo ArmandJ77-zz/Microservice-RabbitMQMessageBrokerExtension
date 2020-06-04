@@ -9,10 +9,26 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+   
+    - name: Fetch all history for all tags and branches
+      run: git fetch --prune --unshallow
+    - name: Install GitVersion
+      uses: gittools/actions/gitversion/setup@v0.9
+      with:
+          versionSpec: '5.1.x'
+    - name: Use GitVersion
+      id: gitversion # step id used as reference for output values
+      uses: gittools/actions/gitversion/execute@v0.9
+    - run: |
+        echo "NuGetVersionV2: ${{ steps.gitversion.outputs.nuGetVersionV2 }}"
+        echo "NuGetPreReleaseTagV2: ${{ steps.gitversion.outputs.CommitsSinceVersionSourcePadded }}"
+        echo "Gitversion outputs: ${{steps.gitversion.outputs}}"
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.101
+    - name: Start docker test container
+      run: docker-compose -f docker-compose.yml up -d
     - name: Install dependencies
       run: dotnet restore
     - name: Build
@@ -20,6 +36,6 @@ jobs:
     - name: test
       run: dotnet test
     - name: Pack Nuget
-      run: dotnet pack Microservice.RabbitMQMessageBrokerExtension/Microservice.RabbitMQMessageBrokerExtension.csproj --output nuget-packages --configuration Release
+      run: dotnet pack Microservice.RabbitMQMessageBrokerExtension/Microservice.RabbitMQMessageBrokerExtension.csproj --output nuget-packages --configuration Release -p:PackageVersion="${{ steps.gitversion.outputs.nuGetVersionV2 }}"
     - name: Push Nuget
       run: dotnet nuget push nuget-packages/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
