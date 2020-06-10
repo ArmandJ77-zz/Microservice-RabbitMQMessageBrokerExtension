@@ -16,7 +16,7 @@ namespace Microservice.RabbitMQMessageBrokerExtension.Logger
         public void MessageReceived<T>(T eventModel, MessageReceivedLogContext context, long elapsedMilliseconds)
         {
             _logger.LogInformation(
-                "RabbitMQ: Message received for topic in worker pool, {@details}", new
+                "RabbitMQ: Message received for topic in worker pool,  {@details}", new
                 {
                     RabbitMessageBrokerClientMessageReceived = new
                     {
