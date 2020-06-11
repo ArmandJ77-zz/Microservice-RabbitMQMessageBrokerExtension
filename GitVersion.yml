@@ -1,5 +1,28 @@
-mode: ContinuousDelivery
-branches: {}
+mode: Mainline
+next-version: 1.3.0
+branches:
+    feature:
+        mode: ContinuousDeployment
+        regex: features?[/-]
+        source-branches:
+            - master
+            - develop
+    release:
+        mode: ContinuousDeployment
+        regex: release?[/-]
+        source-branches:
+            - master
+            - develop
+    hotfix:
+        mode: ContinuousDeployment
+        regex: hotfix?[/-]
+        source-branches:
+            - master
+            - develop
+    develop:
+        mode: ContinuousDeployment
+        regex: develop
+        source-branches:
+            - master
 ignore:
-  sha: []
-merge-message-formats: {}
+    sha: []
