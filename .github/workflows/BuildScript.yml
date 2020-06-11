@@ -1,7 +1,7 @@
 name: Microservice-RabbitMQMessageBrokerExtension
 
 on: [push]
-
+  
 jobs:
   build:
 
