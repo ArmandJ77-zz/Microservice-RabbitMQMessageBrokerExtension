@@ -36,6 +36,6 @@ jobs:
     - name: test
       run: dotnet test
     - name: Pack Nuget
-      run: dotnet pack Microservice.RabbitMQMessageBrokerExtension/Microservice.RabbitMQMessageBrokerExtension.csproj --output nuget-packages --configuration Release -p:PackageVersion=${{ steps.gitversion.outputs.nuGetVersionV2 }}-${{ steps.gitversion.outputs.CommitsSinceVersionSourcePadded }}
+      run: dotnet pack Microservice.RabbitMQMessageBrokerExtension/Microservice.RabbitMQMessageBrokerExtension.csproj --output nuget-packages --configuration Release -p:PackageVersion=${{ steps.gitversion.outputs.nuGetVersionV2 }}
     - name: Push Nuget
       run: dotnet nuget push nuget-packages/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
